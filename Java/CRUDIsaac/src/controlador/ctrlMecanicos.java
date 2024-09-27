@@ -2,18 +2,18 @@ package controlador;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import modelo.Producto;
-import vista.frmProductos;
+import modelo.Mecanico;
+import vista.frmMecanicos;
 
 
-public class ctrProductos implements MouseListener{
+public class ctrlMecanicos implements MouseListener{
     
     //Llamar a las otras capas (modelo, vista)
-    private frmProductos vista;
-    private Producto modelo;
+    private frmMecanicos vista;
+    private Mecanico modelo;
     
     //Crear el constructor de la clase
-    public ctrProductos(frmProductos Vista, Producto Modelo){
+    public ctrlMecanicos(frmMecanicos Vista, Mecanico Modelo){
         this.vista = Vista;
         this.modelo = Modelo;
         
@@ -35,15 +35,17 @@ public class ctrProductos implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == vista.btnGuardar){
             modelo.setNombre(vista.txtNombre.getText());
-            modelo.setPrecio(Double.parseDouble(vista.txtPrecio.getText()));
-            modelo.setCategoria(vista.txtCategoria.getText());
+            modelo.setCorreo(vista.txtCorreo.getText());
+            modelo.setEdad(Integer.parseInt(vista.txtEdad.getText()));
+            modelo.setPeso(Double.parseDouble(vista.txtPeso.getText()));
             
             modelo.Guardar();
             modelo.Mostrar(vista.jtbProducto);
             
             vista.txtNombre.setText("");
-            vista.txtPrecio.setText("");
-            vista.txtCategoria.setText("");
+            vista.txtCorreo.setText("");
+            vista.txtEdad.setText("");
+            vista.txtPeso.setText("");
             
         }
         
@@ -52,8 +54,9 @@ public class ctrProductos implements MouseListener{
             modelo.Mostrar(vista.jtbProducto);
             
             vista.txtNombre.setText("");
-            vista.txtPrecio.setText("");
-            vista.txtCategoria.setText("");
+            vista.txtCorreo.setText("");
+            vista.txtEdad.setText("");
+            vista.txtPeso.setText("");
             
         }
         
@@ -63,12 +66,14 @@ public class ctrProductos implements MouseListener{
         
         if(e.getSource() == vista.btnActualizar){            
             modelo.setNombre(vista.txtNombre.getText());
-            modelo.setPrecio(Double.parseDouble(vista.txtPrecio.getText()));
-            modelo.setCategoria(vista.txtCategoria.getText());
+            modelo.setCorreo(vista.txtCorreo.getText());
+            modelo.setEdad(Integer.parseInt(vista.txtEdad.getText()));
+            modelo.setPeso(Double.parseDouble(vista.txtPeso.getText()));
             
             vista.txtNombre.setText("");
-            vista.txtPrecio.setText("");
-            vista.txtCategoria.setText("");
+            vista.txtCorreo.setText("");
+            vista.txtEdad.setText("");
+            vista.txtPeso.setText("");
             
             modelo.Actualizar(vista.jtbProducto);
             modelo.Mostrar(vista.jtbProducto);

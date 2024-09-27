@@ -4,24 +4,25 @@ import java.util.UUID;
 import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import vista.frmProductos;
+import vista.frmMecanicos;
 
 
-public class Producto {
+public class Mecanico {
     //1-Parametros
-    String UUID_producto;
+    String UUID_mecanico;
     String nombre;
-    double precio;
-    String categoria;
+    int edad;
+    double peso;
+    String correo;
     
     //2- Getters y Setters
 
-    public String getUUID_producto() {
-        return UUID_producto;
+    public String getUUID_mecanico() {
+        return UUID_mecanico;
     }
 
-    public void setUUID_producto(String UUID_producto) {
-        this.UUID_producto = UUID_producto;
+    public void setUUID_mecanico(String UUID_mecanico) {
+        this.UUID_mecanico = UUID_mecanico;
     }
 
     public String getNombre() {
@@ -32,21 +33,30 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
-        return precio;
+    public int getEdad() {
+        return edad;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public double getPeso() {
+        return peso;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setPeso(double peso) {
+        this.peso = peso;
     }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     
     //3-Funciones
       
@@ -55,15 +65,17 @@ public class Producto {
         Connection conexion = ClaseConexion.getConexion();
         try {
             //Creamos el PreparedStatement que ejecutará la Query
-            PreparedStatement addProducto = conexion.prepareStatement("INSERT INTO tbProductos(UUID_producto, nombre, precio, categoria) VALUES (?, ?, ?, ?)");
+            PreparedStatement addMecanico = conexion.prepareStatement("INSERT INTO tbMecanico(UUID_Mecanico, nombre_mecanico, edad_mecanico, peso_mecanico, correo_mecanico) VALUES (?, ?, ?, ?, ?)");
             //Establecer valores de la consulta SQL
-            addProducto.setString(1, UUID.randomUUID().toString());
-            addProducto.setString(2, getNombre());
-            addProducto.setDouble(3, getPrecio());
-            addProducto.setString(4, getCategoria());
+            addMecanico.setString(1, UUID.randomUUID().toString());
+            addMecanico.setString(2, getNombre());
+            addMecanico.setInt(3, getEdad());
+            addMecanico.setDouble(4, getPeso());
+            addMecanico.setString(5, getCorreo());
+            
  
             //Ejecutar la consulta
-            addProducto.executeUpdate();
+            addMecanico.executeUpdate();
             
  
         } catch (SQLException ex) {
@@ -75,23 +87,23 @@ public class Producto {
         //Creamos una variable de la clase de conexion
         Connection conexion = ClaseConexion.getConexion();
         //Definimos el modelo de la tabla
-        DefaultTableModel modeloPinulito = new DefaultTableModel();
-        modeloPinulito.setColumnIdentifiers(new Object[]{"UUID_producto", "Nombre", "Precio", "Categoria"});
+        DefaultTableModel modeloMecanico = new DefaultTableModel();
+        modeloMecanico.setColumnIdentifiers(new Object[]{"Nombre", "Edad", "Peso", "Correo electrónico"});
         try {
             //Creamos un Statement
             Statement statement = conexion.createStatement();
             //Ejecutamos el Statement con la consulta y lo asignamos a una variable de tipo ResultSet
-            ResultSet rs = statement.executeQuery("SELECT * FROM tbProductos");
+            ResultSet rs = statement.executeQuery("SELECT * FROM tbMecanico");
             //Recorremos el ResultSet
             while (rs.next()) {
                 //Llenamos el modelo por cada vez que recorremos el resultSet
-                modeloPinulito.addRow(new Object[]{rs.getString("UUID_producto"), 
-                    rs.getString("nombre"), 
-                    rs.getDouble("precio"), 
-                    rs.getString("categoria")});
+                modeloMecanico.addRow(new Object[]{rs.getString("nombre_mecanico"), 
+                    rs.getInt("edad_mecanico"), 
+                    rs.getDouble("peso_mecanico"), 
+                    rs.getString("correo_mecanico")});
             }
             //Asignamos el nuevo modelo lleno a la tabla
-            tabla.setModel(modeloPinulito);
+            tabla.setModel(modeloMecanico);
         } catch (Exception e) {
             System.out.println("Este es el error en el modelo, metodo mostrar " + e);
         }
@@ -107,9 +119,9 @@ public class Producto {
         String miId = tabla.getValueAt(filaSeleccionada, 0).toString();
         //borramos 
         try {
-            PreparedStatement deleteEstudiante = conexion.prepareStatement("delete from tbProductos where UUID_producto = ?");
-            deleteEstudiante.setString(1, miId);
-            deleteEstudiante.executeUpdate();
+            PreparedStatement deleteMecanico = conexion.prepareStatement("delete from tbMecanico where UUID_mecanico = ?");
+            deleteMecanico.setString(1, miId);
+            deleteMecanico.executeUpdate();
         } catch (Exception e) {
             System.out.println("este es el error metodo de eliminar" + e);
         }
@@ -125,11 +137,12 @@ public class Producto {
             String miUUId = tabla.getValueAt(filaSeleccionada, 0).toString();
             try { 
                 //Ejecutamos la Query
-                PreparedStatement updateUser = conexion.prepareStatement("update tbProductos set nombre= ?, precio = ?, categoria = ? where UUID_producto = ?");
+                PreparedStatement updateUser = conexion.prepareStatement("update tbMecanico set nombre_mecanico= ?, edad_mecanico = ?, peso_mecanico = ?, correo_mecanico where UUID_mecanico = ?");
                 updateUser.setString(1, getNombre());
-                updateUser.setDouble(2, getPrecio());
-                updateUser.setString(3, getCategoria());
-                updateUser.setString(4, miUUId);
+                updateUser.setInt(2, getEdad());
+                updateUser.setDouble(3, getPeso());
+                updateUser.setString(4, getCorreo());
+                updateUser.setString(5, miUUId);
                 updateUser.executeUpdate();
             } catch (Exception e) {
                 System.out.println("este es el error en el metodo de actualizar" + e);
@@ -139,7 +152,7 @@ public class Producto {
         }
     }
          
-           public void cargarDatosTabla(frmProductos vista) {
+           public void cargarDatosTabla(frmMecanicos vista) {
         // Obtén la fila seleccionada 
         int filaSeleccionada = vista.jtbProducto.getSelectedRow();
         // Debemos asegurarnos que haya una fila seleccionada antes de acceder a sus valores
@@ -151,8 +164,8 @@ public class Producto {
             
             // Establece los valores en los campos de texto
             vista.txtNombre.setText(NombreDeTB);
-            vista.txtPrecio.setText(PrecioTB);
-            vista.txtCategoria.setText(CategoriaTB);
+            vista.txtCorreo.setText(PrecioTB);
+            vista.txtEdad.setText(CategoriaTB);
         }
     }
 }
