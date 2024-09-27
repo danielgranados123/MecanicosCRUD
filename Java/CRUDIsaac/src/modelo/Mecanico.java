@@ -88,7 +88,7 @@ public class Mecanico {
         Connection conexion = ClaseConexion.getConexion();
         //Definimos el modelo de la tabla
         DefaultTableModel modeloMecanico = new DefaultTableModel();
-        modeloMecanico.setColumnIdentifiers(new Object[]{"Nombre", "Edad", "Peso", "Correo electrónico"});
+        modeloMecanico.setColumnIdentifiers(new Object[]{"Código", "Nombre", "Edad", "Peso", "Correo electrónico"});
         try {
             //Creamos un Statement
             Statement statement = conexion.createStatement();
@@ -97,7 +97,8 @@ public class Mecanico {
             //Recorremos el ResultSet
             while (rs.next()) {
                 //Llenamos el modelo por cada vez que recorremos el resultSet
-                modeloMecanico.addRow(new Object[]{rs.getString("nombre_mecanico"), 
+                modeloMecanico.addRow(new Object[]{rs.getString("uuid_mecanico"), 
+                    rs.getString("nombre_mecanico"),
                     rs.getInt("edad_mecanico"), 
                     rs.getDouble("peso_mecanico"), 
                     rs.getString("correo_mecanico")});
@@ -137,7 +138,7 @@ public class Mecanico {
             String miUUId = tabla.getValueAt(filaSeleccionada, 0).toString();
             try { 
                 //Ejecutamos la Query
-                PreparedStatement updateUser = conexion.prepareStatement("update tbMecanico set nombre_mecanico= ?, edad_mecanico = ?, peso_mecanico = ?, correo_mecanico where UUID_mecanico = ?");
+                PreparedStatement updateUser = conexion.prepareStatement("update tbMecanico set nombre_mecanico= ?, edad_mecanico = ?, peso_mecanico = ?, correo_mecanico = ? where UUID_mecanico = ?");
                 updateUser.setString(1, getNombre());
                 updateUser.setInt(2, getEdad());
                 updateUser.setDouble(3, getPeso());
@@ -157,10 +158,10 @@ public class Mecanico {
         int filaSeleccionada = vista.jtbProducto.getSelectedRow();
         // Debemos asegurarnos que haya una fila seleccionada antes de acceder a sus valores
         if (filaSeleccionada != -1) {
-            String nombre = vista.jtbProducto.getValueAt(filaSeleccionada, 0).toString();
-            String edad = vista.jtbProducto.getValueAt(filaSeleccionada, 1).toString();
-            String peso = vista.jtbProducto.getValueAt(filaSeleccionada, 2).toString();
-            String correo = vista.jtbProducto.getValueAt(filaSeleccionada, 3).toString();
+            String nombre = vista.jtbProducto.getValueAt(filaSeleccionada, 1).toString();
+            String edad = vista.jtbProducto.getValueAt(filaSeleccionada, 2).toString();
+            String peso = vista.jtbProducto.getValueAt(filaSeleccionada, 3).toString();
+            String correo = vista.jtbProducto.getValueAt(filaSeleccionada, 4).toString();
             
             // Establece los valores en los campos de texto
             vista.txtNombre.setText(nombre);
