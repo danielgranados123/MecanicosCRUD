@@ -40,6 +40,11 @@ public class ctrlMecanicos implements MouseListener{
             if (vista.txtNombre.getText().isEmpty() || vista.txtEdad.getText().isEmpty() || vista.txtPeso.getText().isEmpty() || vista.txtCorreo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(vista, "Debes llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
+                 // Validar que el correo sea válido
+                if (!vista.txtCorreo.getText().contains("@") || !vista.txtCorreo.getText().contains(".com")) {
+            JOptionPane.showMessageDialog(vista, "Ingrese un correo válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // No continua si el correo no es válido
+            }else{
             modelo.setNombre(vista.txtNombre.getText());
             modelo.setCorreo(vista.txtCorreo.getText());
             modelo.setEdad(Integer.parseInt(vista.txtEdad.getText()));
@@ -52,7 +57,7 @@ public class ctrlMecanicos implements MouseListener{
             vista.txtCorreo.setText("");
             vista.txtEdad.setText("");
             vista.txtPeso.setText("");
-            }  
+            }  }
         }
         
         if(e.getSource() == vista.btnEliminar){   
@@ -77,6 +82,11 @@ public class ctrlMecanicos implements MouseListener{
             if (vista.txtNombre.getText().isEmpty() || vista.txtEdad.getText().isEmpty() || vista.txtPeso.getText().isEmpty() || vista.txtCorreo.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(vista, "Debes seleccionar un registro para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
+                // Validar que el correo sea válido
+                if (!vista.txtCorreo.getText().contains("@") || !vista.txtCorreo.getText().contains(".com")) {
+            JOptionPane.showMessageDialog(vista, "Ingrese un correo válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // No continua si el correo no es válido
+            }else{
             modelo.setNombre(vista.txtNombre.getText());
             modelo.setCorreo(vista.txtCorreo.getText());
             modelo.setEdad(Integer.parseInt(vista.txtEdad.getText()));
@@ -89,7 +99,7 @@ public class ctrlMecanicos implements MouseListener{
             
             modelo.Actualizar(vista.jtbProducto);
             modelo.Mostrar(vista.jtbProducto);
-            }
+            }}
         }
         
         if(e.getSource() == vista.btnLimpiar){            
