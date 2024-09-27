@@ -28,6 +28,8 @@ public class ctrlMecanicos implements MouseListener{
         
         vista.btnActualizar.addMouseListener(this);
         
+        vista.btnLimpiar.addMouseListener(this);
+        
         
     }
 
@@ -77,6 +79,13 @@ public class ctrlMecanicos implements MouseListener{
             
             modelo.Actualizar(vista.jtbProducto);
             modelo.Mostrar(vista.jtbProducto);
+        }
+        
+        if(e.getSource() == vista.btnLimpiar){            
+            vista.txtNombre.setText("");
+            vista.txtCorreo.setText("");
+            vista.txtEdad.setText("");
+            vista.txtPeso.setText("");
         }
         
     }
