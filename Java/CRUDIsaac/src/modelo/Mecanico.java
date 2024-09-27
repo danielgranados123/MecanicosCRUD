@@ -157,15 +157,16 @@ public class Mecanico {
         int filaSeleccionada = vista.jtbProducto.getSelectedRow();
         // Debemos asegurarnos que haya una fila seleccionada antes de acceder a sus valores
         if (filaSeleccionada != -1) {
-            String UUIDDeTb = vista.jtbProducto.getValueAt(filaSeleccionada, 0).toString();
-            String NombreDeTB = vista.jtbProducto.getValueAt(filaSeleccionada, 1).toString();
-            String PrecioTB = vista.jtbProducto.getValueAt(filaSeleccionada, 2).toString();
-            String CategoriaTB = vista.jtbProducto.getValueAt(filaSeleccionada, 3).toString();
+            String nombre = vista.jtbProducto.getValueAt(filaSeleccionada, 0).toString();
+            String edad = vista.jtbProducto.getValueAt(filaSeleccionada, 1).toString();
+            String peso = vista.jtbProducto.getValueAt(filaSeleccionada, 2).toString();
+            String correo = vista.jtbProducto.getValueAt(filaSeleccionada, 3).toString();
             
             // Establece los valores en los campos de texto
-            vista.txtNombre.setText(NombreDeTB);
-            vista.txtCorreo.setText(PrecioTB);
-            vista.txtEdad.setText(CategoriaTB);
+            vista.txtNombre.setText(nombre);
+            vista.txtEdad.setText(edad);
+            vista.txtCorreo.setText(correo);
+            vista.txtPeso.setText(peso);
         }
     }
 }
