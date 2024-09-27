@@ -50,7 +50,6 @@ public class frmMecanicos extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
         jtbProductos = new javax.swing.JScrollPane();
         jtbProducto = new javax.swing.JTable();
         txtPeso = new javax.swing.JTextField();
@@ -134,11 +133,6 @@ public class frmMecanicos extends javax.swing.JFrame {
         btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         btnLimpiar.setText("Limpiar");
         jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 480, 120, 40));
-
-        txtBuscar.setBackground(new java.awt.Color(233, 233, 233));
-        txtBuscar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        txtBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 380, 40));
 
         jtbProducto.setBackground(new java.awt.Color(255, 255, 255));
         jtbProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -248,7 +242,6 @@ public class frmMecanicos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     public javax.swing.JTable jtbProducto;
     public javax.swing.JScrollPane jtbProductos;
-    public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtCorreo;
     public javax.swing.JTextField txtEdad;
     public javax.swing.JTextField txtNombre;
