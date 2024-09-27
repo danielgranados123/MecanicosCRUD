@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 import modelo.Mecanico;
 import vista.frmMecanicos;
 
@@ -36,6 +37,9 @@ public class ctrlMecanicos implements MouseListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == vista.btnGuardar){
+            if (vista.txtNombre.getText().isEmpty() || vista.txtEdad.getText().isEmpty() || vista.txtPeso.getText().isEmpty() || vista.txtCorreo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(vista, "Debes llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
             modelo.setNombre(vista.txtNombre.getText());
             modelo.setCorreo(vista.txtCorreo.getText());
             modelo.setEdad(Integer.parseInt(vista.txtEdad.getText()));
@@ -48,10 +52,13 @@ public class ctrlMecanicos implements MouseListener{
             vista.txtCorreo.setText("");
             vista.txtEdad.setText("");
             vista.txtPeso.setText("");
-            
+            }  
         }
         
-        if(e.getSource() == vista.btnEliminar){            
+        if(e.getSource() == vista.btnEliminar){   
+            if (vista.txtNombre.getText().isEmpty() || vista.txtEdad.getText().isEmpty() || vista.txtPeso.getText().isEmpty() || vista.txtCorreo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(vista, "Debes seleccionar un registro para eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
             modelo.Eliminar(vista.jtbProducto);
             modelo.Mostrar(vista.jtbProducto);
             
@@ -59,14 +66,17 @@ public class ctrlMecanicos implements MouseListener{
             vista.txtCorreo.setText("");
             vista.txtEdad.setText("");
             vista.txtPeso.setText("");
-            
+            }
         }
         
         if (e.getSource() == vista.jtbProducto) {
             modelo.cargarDatosTabla(vista);
         }
         
-        if(e.getSource() == vista.btnActualizar){            
+        if(e.getSource() == vista.btnActualizar){       
+            if (vista.txtNombre.getText().isEmpty() || vista.txtEdad.getText().isEmpty() || vista.txtPeso.getText().isEmpty() || vista.txtCorreo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(vista, "Debes seleccionar un registro para actualizar", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
             modelo.setNombre(vista.txtNombre.getText());
             modelo.setCorreo(vista.txtCorreo.getText());
             modelo.setEdad(Integer.parseInt(vista.txtEdad.getText()));
@@ -79,6 +89,7 @@ public class ctrlMecanicos implements MouseListener{
             
             modelo.Actualizar(vista.jtbProducto);
             modelo.Mostrar(vista.jtbProducto);
+            }
         }
         
         if(e.getSource() == vista.btnLimpiar){            
